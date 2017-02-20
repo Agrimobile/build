@@ -52,7 +52,9 @@ $cssFiles | foreach-object {
   }
 }
 
-$extAll = $ExtJsSource + "\ext\build\ext-all.js"
+$extAllFile = "ext-all-rtl-debug.js"
+$extAllSource = $ExtJsSource + "\ext\build"
+$extAll = $extAllSource + "\" + $extAllFile
 
 if( -not (test-path $extAll) ) {
   "Este archivo no existe: " + $extAll + ". Necesita un archivo js minificado del framework para trabajar. Se aborta el deployment a Testing." 
@@ -62,8 +64,8 @@ if( -not (test-path $extAll) ) {
 # copy ext-all.js en alguna parte (?) de $TestingWeb
 
 $extAllTarget =  $TestingWeb + "\ext_library"
-$extAllSource = $ExtJsSource + "\ext\build"
-robocopy $extAllSource $extAllTarget "ext-all.js"
+
+robocopy $extAllSource $extAllTarget $extAllFile
 
 # copy app.js, index-testing.html (cambia nombre a index.html) directamente en $TestingWeb
 
