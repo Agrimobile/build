@@ -31,6 +31,13 @@ SET CordovaProject=C:\agromobile
 SET Platform=android
 
 ECHO.
+ECHO SenchaCmd Build
+ECHO ************************************************************
+pushd %ExtJsSource%
+sencha app build
+popd
+
+ECHO.
 ECHO Paso 1 - Deployment de Development(webapp) a TestingWeb(webapp)
 ECHO ************************************************************
 
@@ -40,13 +47,13 @@ if "%isWeb%"=="web" goto :end
 
 ECHO.
 ECHO Paso 2 - TODO: Deployment de Testing(webapp) a ProyectoCordova(www - webapp)
-ECHO ************************************************************ (Process Empty)
+ECHO ************************************************************ 
 
 powershell .\TestingToCordovaProject.ps1 %TestingWeb% %CordovaProject%
 
 ECHO.
 ECHO Paso 3 - TODO: Building del ProyectoCordova(www - webapp) a TestingApp(Native-android)
-ECHO ************************************************************ (Process Empty)
+ECHO ************************************************************ 
 
 powershell .\run.ps1 %CordovaProject% %Platform%
 
