@@ -30,6 +30,12 @@ SET TestingWeb=C:\wamp64\www\agromobile-testing
 SET CordovaProject=C:\agromobile
 SET Platform=android
 
+set senchaBuild=%2
+
+if "%senchaBuild%"=="sencha" goto :sencha
+goto :nosencha
+
+:sencha
 ECHO.
 ECHO SenchaCmd Build
 ECHO ************************************************************
@@ -37,6 +43,7 @@ pushd %ExtJsSource%
 sencha app build
 popd
 
+:nosencha
 ECHO.
 ECHO Paso 1 - Deployment de Development(webapp) a TestingWeb(webapp)
 ECHO ************************************************************
@@ -46,16 +53,23 @@ powershell .\DeployToTesting.ps1 %ExtJsSource% %TestingWeb%
 if "%isWeb%"=="web" goto :end
 
 ECHO.
-ECHO Paso 2 - TODO: Deployment de Testing(webapp) a ProyectoCordova(www - webapp)
+ECHO Paso 2 - Deployment de Testing(webapp) a ProyectoCordova(www - webapp)
 ECHO ************************************************************ 
 
 powershell .\TestingToCordovaProject.ps1 %TestingWeb% %CordovaProject%
 
 ECHO.
-ECHO Paso 3 - TODO: Building del ProyectoCordova(www - webapp) a TestingApp(Native-android)
+ECHO Paso 3 - Building del ProyectoCordova(www - webapp) a TestingApp(Native-android)
 ECHO ************************************************************ 
 
+if "%isWeb%"=="bld" goto :bld
+
 powershell .\run.ps1 %CordovaProject% %Platform%
+goto :end
+
+:bld
+
+powershell .\run.ps1 %CordovaProject% %Platform% bld
 
 :end
 

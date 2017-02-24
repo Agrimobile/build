@@ -1,7 +1,8 @@
 param(
   [string]$CordovaProject, 
-  [string]$platform
-)
+  [string]$platform,
+  [string]$mode
+  )
 
 $cdvWww = $CordovaProject + "\www"
 
@@ -16,6 +17,12 @@ if ($platform) {
 
 pushd $cdvWww
 
-cordova run $platform
+if($mode -and $mode -eq "bld") {
+  cordova build $platform
+}
+else {
+  cordova run $platform
+}
+
 
 popd
