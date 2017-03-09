@@ -9,7 +9,7 @@ if (-not (test-path $ExtJsSource)) {
 }
 
 if (-not (test-path $TestingWeb)) {
-  "Este directorio no existe: " + $TestingWeb + ". Configure correctamente Builder. Se aborta el deployment a Testing." 
+  "Este directorio no existe: " + $TestingWeb + ". Configure correctamente Builder o cree la carpeta si piensa que el destino es el correcto. Se aborta el deployment a Testing." 
   exit
 }
 
